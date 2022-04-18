@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/layout_manage_tokens_button"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@null"
+    android:gravity="center"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/text_add_hide_tokens"
+        android:layout_width="wrap_content"
+        style="@style/Button.Border.Primary"
+        android:text="@string/add_hide_tokens"
+        android:paddingHorizontal="20dp"
+        />
+
+</LinearLayout>

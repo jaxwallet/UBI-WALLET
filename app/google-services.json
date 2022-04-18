@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "899237104752",
+    "project_id": "ubi-wallet",
+    "storage_bucket": "ubi-wallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899237104752:android:dd826da69d3f47df5f78b5",
+        "android_client_info": {
+          "package_name": "com.ubiwallet.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899237104752-8a3pj1krp1oc1e8ar2qm36c09f2kpf2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ubiwallet.app",
+            "certificate_hash": "d0bbd3664a7db0df40d046509cc1f7377e278fa9"
+          }
+        },
+        {
+          "client_id": "899237104752-7a5v03miv5q6lgtkds6khmri7gv85dto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT4CvrxdGfTrHlSD6Bqm6C4l4K7a_AjyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899237104752-7a5v03miv5q6lgtkds6khmri7gv85dto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
