@@ -13,6 +13,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.bonuswallet.app.entity.CreateWalletCallbackInterface;
+import com.bonuswallet.app.entity.CustomViewSettings;
 import com.bonuswallet.app.entity.Operation;
 import com.bonuswallet.app.entity.Wallet;
 import com.bonuswallet.app.entity.WalletType;
@@ -159,7 +160,7 @@ public class SplashViewModel extends ViewModel
 
     public void setDefaultBrowser()
     {
-        preferenceRepository.setActiveBrowserNetwork(MATIC_ID);
+        preferenceRepository.setActiveBrowserNetwork(CustomViewSettings.primaryChain);
     }
 
     public long getInstallTime() {

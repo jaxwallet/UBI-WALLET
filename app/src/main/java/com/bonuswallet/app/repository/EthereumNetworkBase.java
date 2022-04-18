@@ -10,6 +10,7 @@ import com.bonuswallet.app.C;
 import com.bonuswallet.app.R;
 import com.bonuswallet.app.entity.ContractLocator;
 import com.bonuswallet.app.entity.ContractType;
+import com.bonuswallet.app.entity.CustomViewSettings;
 import com.bonuswallet.app.entity.NetworkInfo;
 import com.bonuswallet.app.entity.Wallet;
 import com.bonuswallet.app.entity.tokens.Token;
@@ -55,7 +56,6 @@ import static com.bonuswallet.ethereum.EthereumNetworkBase.GOERLI_ID;
 import static com.bonuswallet.ethereum.EthereumNetworkBase.HECO_ID;
 import static com.bonuswallet.ethereum.EthereumNetworkBase.HECO_TEST_ID;
 import static com.bonuswallet.ethereum.EthereumNetworkBase.KOVAN_ID;
-import static com.bonuswallet.ethereum.EthereumNetworkBase.MAINNET_ID;
 import static com.bonuswallet.ethereum.EthereumNetworkBase.MATIC_ID;
 import static com.bonuswallet.ethereum.EthereumNetworkBase.MATIC_TEST_ID;
 import static com.bonuswallet.ethereum.EthereumNetworkBase.OPTIMISTIC_MAIN_ID;
@@ -146,7 +146,7 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
     //If your wallet prioritises xDai for example, you may want to move the XDAI_ID to the front of this list,
     //Then xDai would appear as the first token at the top of the wallet
 //    private static final List<Long> hasValue = Arrays.asList(
-//            MAINNET_ID, CLASSIC_ID, XDAI_ID, POA_ID, ARTIS_SIGMA1_ID, BINANCE_MAIN_ID, HECO_ID, AVALANCHE_ID,
+//            CustomViewSettings.primaryChain, CLASSIC_ID, XDAI_ID, POA_ID, ARTIS_SIGMA1_ID, BINANCE_MAIN_ID, HECO_ID, AVALANCHE_ID,
 //            FANTOM_ID, MATIC_ID, OPTIMISTIC_MAIN_ID, ARBITRUM_MAIN_ID, PALM_ID);
 
     private static final List<Long> hasValue = Arrays.asList(
@@ -156,9 +156,9 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
     //the entries are automatically sorted into numerical order
     private static final LongSparseArray<NetworkInfo> networkMap = new LongSparseArray<NetworkInfo>() {
         {
-//            put(MAINNET_ID, new NetworkInfo(C.ETHEREUM_NETWORK_NAME, C.ETH_SYMBOL,
+//            put(CustomViewSettings.primaryChain, new NetworkInfo(C.ETHEREUM_NETWORK_NAME, C.ETH_SYMBOL,
 //                    MAINNET_RPC_URL,
-//                    "https://cn.etherscan.com/tx/", MAINNET_ID,
+//                    "https://cn.etherscan.com/tx/", CustomViewSettings.primaryChain,
 //                    MAINNET_FALLBACK_RPC_URL, "https://api-cn.etherscan.com/api?"));
 //            put(CLASSIC_ID, new NetworkInfo(C.CLASSIC_NETWORK_NAME, C.ETC_SYMBOL,
 //                    CLASSIC_RPC_URL,
@@ -272,7 +272,7 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
 
     private static final LongSparseArray<Integer> chainLogos = new LongSparseArray<Integer>() {
         {
-            put(MAINNET_ID, R.drawable.ic_token_eth);
+            put(CustomViewSettings.primaryChain, R.drawable.ic_token_eth);
             put(KOVAN_ID, R.drawable.ic_kovan);
             put(ROPSTEN_ID, R.drawable.ic_ropsten);
             put(RINKEBY_ID, R.drawable.ic_rinkeby);
@@ -305,7 +305,7 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
 
     private static final LongSparseArray<Integer> chainColours = new LongSparseArray<Integer>() {
         {
-            put(MAINNET_ID, R.color.mainnet);
+            put(CustomViewSettings.primaryChain, R.color.mainnet);
             put(KOVAN_ID, R.color.kovan);
             put(ROPSTEN_ID, R.color.ropsten);
             put(RINKEBY_ID, R.color.rinkeby);
@@ -340,7 +340,7 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
     //Add it to this list here if so. Note that so far, all gas oracles follow the same format:
     //  <etherscanAPI from the above list> + GAS_API
     //If the gas oracle you're adding doesn't follow this spec then you'll have to change the getGasOracle method
-    private static final List<Long> hasGasOracleAPI = Arrays.asList(MAINNET_ID, HECO_ID, BINANCE_MAIN_ID, MATIC_ID);
+    private static final List<Long> hasGasOracleAPI = Arrays.asList(CustomViewSettings.primaryChain, HECO_ID, BINANCE_MAIN_ID, MATIC_ID);
 
     //These chains don't allow custom gas
     private static final List<Long> hasLockedGas = Arrays.asList(OPTIMISTIC_MAIN_ID, OPTIMISTIC_TEST_ID);
@@ -583,7 +583,7 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
     @Override
     public Long getDefaultNetwork(boolean isMainNet)
     {
-        return isMainNet ? MATIC_ID : MATIC_TEST_ID;
+        return isMainNet ? CustomViewSettings.primaryChain : CustomViewSettings.primaryTestChain;
     }
 
     @Override
@@ -732,7 +732,7 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
         }
         else
         {
-            return networkMap.get(MAINNET_ID).getEtherscanUri(txHash).toString();
+            return networkMap.get(CustomViewSettings.primaryChain).getEtherscanUri(txHash).toString();
         }
     }
 
@@ -775,12 +775,12 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
 
     public static List<Long> addDefaultNetworks()
     {
-        return new ArrayList<>(Collections.singletonList(MAINNET_ID));
+        return new ArrayList<>(Collections.singletonList(CustomViewSettings.primaryChain));
     }
 
     public static ContractLocator getOverrideToken()
     {
-        return new ContractLocator("", MAINNET_ID, ContractType.ETHEREUM);
+        return new ContractLocator("", CustomViewSettings.primaryChain, ContractType.ETHEREUM);
     }
 
     @Override
@@ -929,7 +929,7 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
         }
         else
         {
-            return networkMap.get(MAINNET_ID).name;
+            return networkMap.get(CustomViewSettings.primaryChain).name;
         }
     }
 
@@ -943,7 +943,7 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
         }
         else
         {
-            return networkMap.get(MAINNET_ID).symbol;
+            return networkMap.get(CustomViewSettings.primaryChain).symbol;
         }
     }
 }

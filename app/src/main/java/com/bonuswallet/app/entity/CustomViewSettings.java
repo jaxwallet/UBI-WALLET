@@ -10,11 +10,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.bonuswallet.ethereum.EthereumNetworkBase.MAINNET_ID;
+import static com.bonuswallet.ethereum.EthereumNetworkBase.MATIC_ID;
+import static com.bonuswallet.ethereum.EthereumNetworkBase.MATIC_TEST_ID;
 
 public class CustomViewSettings
 {
-    private static final long primaryChain = MAINNET_ID;
-    private static final String primaryChainName = C.ETHEREUM_NETWORK_NAME;
+    public static final long primaryChain = MATIC_ID;
+    public static final long primaryTestChain = MATIC_TEST_ID;
+    public static final String primaryChainName = C.ETHEREUM_NETWORK_NAME;
 
     //You can use the settings in this file to customise the wallet appearance
 
