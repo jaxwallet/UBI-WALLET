@@ -599,41 +599,41 @@ public class FunctionButtonBar extends LinearLayout implements AdapterView.OnIte
      */
     private boolean setupCustomTokenActions()
     {
-        if (token.tokenInfo.chainId == MATIC_ID && token.isNonFungible()) {
-            return false;
-        }
-
-        if (token.tokenInfo.chainId == MAINNET_ID)
-        {
-            switch (token.getAddress().toLowerCase())
-            {
-                case C.DAI_TOKEN:
-                case C.SAI_TOKEN:
-                    addFunction(R.string.convert_to_xdai);
-                    return true;
-                default:
-                    if (token.isERC20() || token.isEthereum())
-                    {
-                        addFunction(R.string.exchange_with_oneinch);
-                    }
-                    return true;
-            }
-        }
-        else if (token.tokenInfo.chainId == BINANCE_MAIN_ID
-                || token.tokenInfo.chainId == OPTIMISTIC_MAIN_ID
-                || token.tokenInfo.chainId == ARBITRUM_MAIN_ID)
-        {
-            if (token.isERC20() || token.isEthereum())
-            {
-                addFunction(R.string.exchange_with_oneinch);
-                return true;
-            }
-        }
-        else if (token.tokenInfo.chainId == MATIC_ID)
-        {
-            addFunction(R.string.swap_with_quickswap);
-            return true;
-        }
+//        if (token.tokenInfo.chainId == MATIC_ID && token.isNonFungible()) {
+//            return false;
+//        }
+//
+//        if (token.tokenInfo.chainId == MAINNET_ID)
+//        {
+//            switch (token.getAddress().toLowerCase())
+//            {
+//                case C.DAI_TOKEN:
+//                case C.SAI_TOKEN:
+//                    addFunction(R.string.convert_to_xdai);
+//                    return true;
+//                default:
+//                    if (token.isERC20() || token.isEthereum())
+//                    {
+//                        addFunction(R.string.exchange_with_oneinch);
+//                    }
+//                    return true;
+//            }
+//        }
+//        else if (token.tokenInfo.chainId == BINANCE_MAIN_ID
+//                || token.tokenInfo.chainId == OPTIMISTIC_MAIN_ID
+//                || token.tokenInfo.chainId == ARBITRUM_MAIN_ID)
+//        {
+//            if (token.isERC20() || token.isEthereum())
+//            {
+//                addFunction(R.string.exchange_with_oneinch);
+//                return true;
+//            }
+//        }
+//        else if (token.tokenInfo.chainId == MATIC_ID)
+//        {
+//            addFunction(R.string.swap_with_quickswap);
+//            return true;
+//        }
         return false;
     }
 
