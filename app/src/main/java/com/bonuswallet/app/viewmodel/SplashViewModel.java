@@ -2,6 +2,8 @@ package com.bonuswallet.app.viewmodel;
 
 import static com.bonuswallet.app.entity.tokenscript.TokenscriptFunction.ZERO_ADDRESS;
 import static com.bonuswallet.ethereum.EthereumNetworkBase.BINANCE_TEST_ID;
+import static com.bonuswallet.ethereum.EthereumNetworkBase.MATIC_ID;
+import static com.bonuswallet.ethereum.EthereumNetworkBase.MATIC_TEST_ID;
 
 import android.app.Activity;
 import android.content.Context;
@@ -157,7 +159,7 @@ public class SplashViewModel extends ViewModel
 
     public void setDefaultBrowser()
     {
-        preferenceRepository.setActiveBrowserNetwork(BINANCE_TEST_ID);
+        preferenceRepository.setActiveBrowserNetwork(MATIC_ID);
     }
 
     public long getInstallTime() {

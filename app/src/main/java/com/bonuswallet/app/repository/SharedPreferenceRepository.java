@@ -182,7 +182,7 @@ public class SharedPreferenceRepository implements PreferenceRepositoryType {
 
     @Override
     public boolean isActiveMainnet() {
-        return pref.getBoolean(ACTIVE_MAINNET, false);
+        return pref.getBoolean(ACTIVE_MAINNET, true);
     }
 
     @Override
