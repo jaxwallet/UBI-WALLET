@@ -117,7 +117,7 @@ public class KeyService implements AuthenticationCallback, PinAuthenticationCall
         NOT_CHECKED, HAS_NO_TEE, HAS_TEE, HAS_STRONGBOX
     }
 
-    private static final int DEFAULT_KEY_STRENGTH = 256;
+    private static final int DEFAULT_KEY_STRENGTH = 128;
     private final Context context;
     private Activity activity;
 
