@@ -72,10 +72,9 @@ public abstract class EthereumNetworkBase implements EthereumNetworkRepositoryTy
 {
     public static final String COVALENT = "[COVALENT]";
 
-    public static final String DEFAULT_HOMEPAGE = "https://beta.jax.money/kyc.php";
-//    public static final String DEFAULT_HOMEPAGE = "https://pancake.kiemtienonline360.com/";
+    public static final String DEFAULT_HOMEPAGE = "https://jaxcorp.com/mobile_ubi_status.html";
 
-    private static final String POLYGON_HOMEPAGE = "https://alphawallet.com/browser-item-category/polygon/";
+    private static final String POLYGON_HOMEPAGE = "https://jaxcorp.com/mobile_ubi_status.html";
 
     private static final String GAS_API = "module=gastracker&action=gasoracle";
     /* constructing URLs from BuildConfig. In the below area you will see hardcoded key like da3717...

@@ -26,14 +26,10 @@ public class CustomViewSettings
     //If you leave the locked chains empty, the token will appear if the chain is selected
     private static final List<TokenInfo> lockedTokens = Arrays.asList(
             // new TokenInfo(String TokenAddress, String TokenName, String TokenSymbol, int TokenDecimals, boolean isEnabled, long ChainId)
-            //new TokenInfo("0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", "USD Coin", "USDC", 6, true, EthereumNetworkBase.MAINNET_ID),
-            //new TokenInfo("0x6C8c6b02E7b2BE14d4fA6022Dfd6d75921D90E4E", "Compound BAT", "CBAT", 8, true, EthereumNetworkBase.MAINNET_ID)
-//            new TokenInfo("0xca1262e77fb25c0a4112cfc9bad3ff54f617f2e6", "Wrapped JAXNET", "WJXN", 0, true, EthereumNetworkBase.BINANCE_MAIN_ID),
-//            new TokenInfo("0xa51bcdc792285598ba7443c71d557e0b7df6f991", "Binance USD", "BUSD", 18, true, EthereumNetworkBase.BINANCE_TEST_ID),
-//            new TokenInfo("0x3a171b7c5d671e3c4bb5823b8fd265f4e4e9a399", "Wrapped Jaxnet", "WJXN", 0, true, EthereumNetworkBase.BINANCE_TEST_ID),
-            new TokenInfo("0x1d60aa1d6137dcb1306c8a901ebd215ca661d0cb", "Wrapped JAX", "WJAX", 4, true, EthereumNetworkBase.MATIC_ID)
-//            new TokenInfo("0xb8bdd95b52ea5b815aaa214aedb8d01aed787157", "JAX Dollar", "JAXUD", 18, true, EthereumNetworkBase.BINANCE_TEST_ID),
-//            new TokenInfo("0xec7d5848f88246ca6984b8019d08b8524793b062", "JAX Rupee", "JAXRE", 18, true, EthereumNetworkBase.BINANCE_TEST_ID)
+
+            new TokenInfo("0x1d60aa1d6137dcb1306c8a901ebd215ca661d0cb", "Wrapped JAX", "WJAX", 4, true, EthereumNetworkBase.MATIC_ID),
+            new TokenInfo("0x364044F4AeCF18699344eE43f9FD6A58C4BEA49c", "Wrapped JAX", "WJAX", 4, true, EthereumNetworkBase.MATIC_TEST_ID)
+//
     );
 
     //List of chains that wallet can show
