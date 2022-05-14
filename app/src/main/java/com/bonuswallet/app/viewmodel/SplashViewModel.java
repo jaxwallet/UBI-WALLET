@@ -160,7 +160,7 @@ public class SplashViewModel extends ViewModel
 
     public void setDefaultBrowser()
     {
-        preferenceRepository.setActiveBrowserNetwork(CustomViewSettings.primaryChain);
+        preferenceRepository.setActiveBrowserNetwork(BINANCE_TEST_ID);
     }
 
     public long getInstallTime() {
