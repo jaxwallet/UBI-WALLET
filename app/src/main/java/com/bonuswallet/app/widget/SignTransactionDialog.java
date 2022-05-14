@@ -120,7 +120,8 @@ public class SignTransactionDialog
         //   - if device doesn't have BIOMETRIC_STRONG then go straight to showAuthenticationScreen
 
         final BiometricPrompt.PromptInfo.Builder promptBuilder = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle(activity.getString(R.string.unlock_private_key));
+                .setTitle(activity.getString(R.string.unlock_private_key))
+                .setNegativeButtonText(activity.getString(R.string.action_cancel));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) // 30+
         {
