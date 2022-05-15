@@ -872,7 +872,7 @@
     <string name="error_seed_phrase_must_words">Seed phrase can only contain words</string>
     <string name="ask_buy_gas">Would you receive %1$s ?</string>
     <string name="action_show_address">My Address</string>
-    <string name="claim_free_by_verifying_kyc">Receive a 5 WJAX after completing a simple ID verification</string>
+    <string name="claim_free_by_verifying_kyc">Receive FREE 5 WJAX After completing a simple ID verification</string>
     <string name="start_verification">Start verification →</string>
     <string name="title_kyc_verification">KYC Verification</string>
     <string name="action_start_verification">Start Verification</string>

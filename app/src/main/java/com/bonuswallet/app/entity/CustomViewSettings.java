@@ -27,8 +27,8 @@ public class CustomViewSettings
     private static final List<TokenInfo> lockedTokens = Arrays.asList(
             // new TokenInfo(String TokenAddress, String TokenName, String TokenSymbol, int TokenDecimals, boolean isEnabled, long ChainId)
 
-            new TokenInfo("0x1d60aa1d6137dcb1306c8a901ebd215ca661d0cb", "Wrapped JAX", "WJAX", 4, true, EthereumNetworkBase.MATIC_ID),
-            new TokenInfo("0x364044F4AeCF18699344eE43f9FD6A58C4BEA49c", "Wrapped JAX", "WJAX", 4, true, EthereumNetworkBase.MATIC_TEST_ID)
+            new TokenInfo("0x1d60aa1d6137dcb1306c8a901ebd215ca661d0cb", "WJAX", "WJAX", 4, true, EthereumNetworkBase.MATIC_ID),
+            new TokenInfo("0x364044F4AeCF18699344eE43f9FD6A58C4BEA49c", "WJAX", "WJAX", 4, true, EthereumNetworkBase.MATIC_TEST_ID)
 //
     );
 
