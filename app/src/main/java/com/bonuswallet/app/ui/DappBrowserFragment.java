@@ -4,6 +4,7 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.LayoutTransition;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -14,6 +15,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -154,6 +156,7 @@ import static com.bonuswallet.app.ui.MyAddressActivity.KEY_ADDRESS;
 import static com.bonuswallet.app.util.KeyboardUtils.showKeyboard;
 import static com.bonuswallet.app.util.Utils.isValidUrl;
 import static com.bonuswallet.app.widget.AWalletAlertDialog.ERROR;
+import static com.bonuswallet.app.widget.AWalletAlertDialog.NONE;
 import static com.bonuswallet.app.widget.AWalletAlertDialog.WARNING;
 import static org.web3j.protocol.core.methods.request.Transaction.createEthCallTransaction;
 
@@ -505,6 +508,38 @@ public class DappBrowserFragment extends BaseFragment implements OnSignTransacti
         web3.setWebLoadCallback(this);
 
         webFrame.setOnApplyWindowInsetsListener(resizeListener);
+
+        web3.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onPermissionRequest(final PermissionRequest request) {
+                Log.d(TAG, "onPermissionRequest");
+                getActivity().runOnUiThread(new Runnable() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void run() {
+                        final String[] requestedResources = request.getResources();
+                        for (String r : requestedResources) {
+                            if (r.equals(PermissionRequest.RESOURCE_VIDEO_CAPTURE)) {
+                                resultDialog = new AWalletAlertDialog(getActivity());
+                                resultDialog.setTitle("Camera access");
+                                resultDialog.setMessage("App requests camera access for verification");
+                                resultDialog.setButtonText(R.string.button_ok);
+                                resultDialog.setButtonListener(v -> {
+                                    resultDialog.dismiss();
+                                    request.grant(request.getResources());
+                                });
+                                resultDialog.setIcon(NONE);
+                                resultDialog.setCancelable(true);
+                                resultDialog.show();
+
+                                break;
+                            }
+                        }
+
+                    }
+                });
+            }
+        });
 
         setupMenu(view);
     }
