@@ -254,6 +254,11 @@ public class WalletFragment extends BaseFragment implements
                 updateMetas(metas);
                 handler.postDelayed(() -> setRealmListener(thisUpdateTime), 500);
             }
+
+            if (viewModel.getWallet().type != WalletType.WATCH && isVisible)
+            {
+                viewModel.checkBackup();
+            }
         });
     }
 
@@ -267,10 +272,10 @@ public class WalletFragment extends BaseFragment implements
                 systemView.hide();
             }
 
-            if (viewModel.getWallet().type != WalletType.WATCH && isVisible)
-            {
-                viewModel.checkBackup();
-            }
+//            if (viewModel.getWallet().type != WalletType.WATCH && isVisible)
+//            {
+//                viewModel.checkBackup();
+//            }
         });
     }
 
