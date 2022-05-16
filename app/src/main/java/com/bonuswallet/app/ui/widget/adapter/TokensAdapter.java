@@ -215,7 +215,7 @@ public class TokensAdapter extends RecyclerView.Adapter<BinderViewHolder> {
 
     public void addWarning(WarningData data)
     {
-        items.add(new WarningSortedItem(data, 1));
+        items.add(new WarningSortedItem(data, -1));
     }
 
     public void removeBackupWarning()
