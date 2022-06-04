@@ -235,7 +235,7 @@ public class TokensService
 
     private void updateCycle(boolean val)
     {
-        eventTimer = Observable.interval(1, 500, TimeUnit.MILLISECONDS)
+        eventTimer = Observable.interval(1, 10000, TimeUnit.MILLISECONDS)
                 .doOnNext(l -> checkTokensBalance())
                 .observeOn(Schedulers.newThread()).subscribe();
     }

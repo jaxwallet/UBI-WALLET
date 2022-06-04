@@ -232,7 +232,7 @@ public class TickerService
     {
         final String apiChainName = coinGeckoChainIdToAPIName.get(chainId);
         final String dexGuruName = dexGuruChainIdToAPISymbol.get(chainId);
-        if (canUpdate.containsKey(chainId) || erc20Tokens.size() == 0)
+        if ((! canUpdate.isEmpty() && ! canUpdate.containsKey(chainId)) || erc20Tokens.size() == 0)
             return Single.fromCallable(() -> 0);
 
         final Map<String, TokenCardMeta> lookupMap = new HashMap<>();
