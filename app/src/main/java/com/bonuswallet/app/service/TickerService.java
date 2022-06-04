@@ -279,7 +279,7 @@ public class TickerService
                 canUpdate.put(chainId, true);
                 localSource.updateERC20Tickers(chainId, erc20Tickers);
 
-                if (dexGuruName != null) addDexGuruTickers(lookupMap.values());
+//                if (dexGuruName != null) addDexGuruTickers(lookupMap.values());
             }
             catch (Exception e)
             {
