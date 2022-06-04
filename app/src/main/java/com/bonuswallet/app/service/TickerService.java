@@ -17,6 +17,7 @@ import static com.bonuswallet.ethereum.EthereumNetworkBase.XDAI_ID;
 import static org.web3j.protocol.core.methods.request.Transaction.createEthCallTransaction;
 
 import android.text.format.DateUtils;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -71,6 +72,7 @@ import okhttp3.Response;
 
 public class TickerService
 {
+    private static final String TAG = "TICKERSERVICE";
     private static final int UPDATE_TICKER_CYCLE = 5; //5 Minutes
     private static final String MEDIANIZER = "0x729D19f657BD0614b4985Cf1D82531c67569197B";
     private static final String MARKET_ORACLE_CONTRACT = "0xf155a7eb4a2993c8cf08a76bca137ee9ac0a01d8";
@@ -234,6 +236,7 @@ public class TickerService
         final String dexGuruName = dexGuruChainIdToAPISymbol.get(chainId);
         if ((! canUpdate.isEmpty() && ! canUpdate.containsKey(chainId)) || erc20Tokens.size() == 0)
             return Single.fromCallable(() -> 0);
+        if(BuildConfig.DEBUG) Log.d(TAG, "Price update");
 
         final Map<String, TokenCardMeta> lookupMap = new HashMap<>();
         for (TokenCardMeta tcm : erc20Tokens) { lookupMap.put(tcm.getAddress().toLowerCase(), tcm); }
