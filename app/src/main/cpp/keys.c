@@ -154,7 +154,7 @@ Java_com_bonuswallet_app_service_GasService_getPolygonScanKey(JNIEnv *env, jobje
 #if (HAS_KEYS == 1)
     return getDecryptedKey(env, polygonScanKey);
 #else
-    const jstring key = "6xXrIGpAQHdCQ0bX1Rj26pRkCfbP3cRq";
+    const jstring key = "IACQ3D998KQKBXHAPIMR5SDVU6EIKN1FWQ";
     return (*env)->NewStringUTF(env, key);
 #endif
 }
