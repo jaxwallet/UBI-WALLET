@@ -64,6 +64,7 @@ import com.bonuswallet.app.entity.CustomViewSettings;
 import com.bonuswallet.app.entity.DApp;
 import com.bonuswallet.app.entity.DAppFunction;
 import com.bonuswallet.app.entity.FragmentMessenger;
+import com.bonuswallet.app.entity.MediaLinks;
 import com.bonuswallet.app.entity.NetworkInfo;
 import com.bonuswallet.app.entity.QRResult;
 import com.bonuswallet.app.entity.SendTransactionInterface;
@@ -115,6 +116,7 @@ import com.bonuswallet.token.entity.SignMessageType;
 import com.bonuswallet.token.entity.Signable;
 import com.bonuswallet.token.tools.Numeric;
 import com.bonuswallet.token.tools.ParseMagicLink;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -998,6 +1000,20 @@ public class DappBrowserFragment extends BaseFragment implements OnSignTransacti
         web3.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if(url.contains(C.DAPP_PREFIX_TELEGRAM)) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    if (isAppAvailable(C.TELEGRAM_PACKAGE_NAME)) {
+                        intent.setPackage(C.TELEGRAM_PACKAGE_NAME);
+                    }
+                    try {
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        FirebaseCrashlytics.getInstance().recordException(e);
+                        if (BuildConfig.DEBUG) e.printStackTrace();
+                    }
+                    return true;
+                }
                 String[] prefixCheck = url.split(":");
                 if (prefixCheck.length > 1)
                 {
@@ -1014,6 +1030,7 @@ public class DappBrowserFragment extends BaseFragment implements OnSignTransacti
                             intent.setData(Uri.parse(url));
                             startActivity(Intent.createChooser(intent, "Email: " + prefixCheck[1]));
                             return true;
+
                         case C.DAPP_PREFIX_ALPHAWALLET:
                             if(prefixCheck[1].equals(C.DAPP_SUFFIX_RECEIVE)) {
                                 viewModel.showMyAddress(getContext());
@@ -1058,6 +1075,16 @@ public class DappBrowserFragment extends BaseFragment implements OnSignTransacti
             web3.loadUrl(Utils.formatUrl(loadOnInit));
             setUrlText(Utils.formatUrl(loadOnInit));
             loadOnInit = null;
+        }
+    }
+
+    private boolean isAppAvailable(String packageName) {
+        PackageManager pm = getActivity().getPackageManager();
+        try {
+            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 

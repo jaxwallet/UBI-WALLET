@@ -225,6 +225,7 @@ public abstract class C {
     public static final String DAPP_DEFAULT_URL = "https://www.stateofthedapps.com/";
     public static final String DAPP_PREFIX_TELEPHONE = "tel";
     public static final String DAPP_PREFIX_MAILTO = "mailto";
+    public static final String DAPP_PREFIX_TELEGRAM = "https://t.me";
     public static final String DAPP_PREFIX_ALPHAWALLET = "alphawallet";
     public static final String DAPP_SUFFIX_RECEIVE = "receive";
     public static final String DAPP_PREFIX_MAPS = "maps.google.com/maps?daddr=";
