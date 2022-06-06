@@ -889,4 +889,8 @@
     <string name="kyc_pending_subtitle">Please Wit While We Verify Your Identity.</string>
     <string name="kyc_declined_subtitle">Please Update Your Information.</string>
     <string name="action_resubmit">Resubmit</string>
+    <string name="claim_free_by_verifying_kyc_approved">You are approved for the JaxCorp UBI program. Check the app regularly to collect your Universal Basic Income.</string>
+    <string name="collect_ubi">Collect UBI</string>
+    <string name="claim_free_by_verifying_kyc_pending">your KYC is under verification</string>
+    <string name="claim_free_by_verifying_kyc_rejected">your ID has been rejected</string>
 </resources>

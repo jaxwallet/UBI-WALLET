@@ -515,19 +515,19 @@ public class WalletFragment extends BaseFragment implements
             case APPROVED:
                 wData = new WarningData(this);
                 wData.title = "Approved";
-                wData.detail = "UBI approved";
+                wData.detail = getString(R.string.claim_free_by_verifying_kyc_approved);
                 adapter.addKyc(wData);
                 break;
             case PENDING:
                 wData = new WarningData(this);
                 wData.title = "Pending";
-                wData.detail = "UBI pending";
+                wData.detail = getString(R.string.claim_free_by_verifying_kyc_pending);
                 adapter.addKyc(wData);
                 break;
             case REJECTED:
                 wData = new WarningData(this);
                 wData.title = "Rejected";
-                wData.detail = "UBI Rejected";
+                wData.detail = getString(R.string.claim_free_by_verifying_kyc_rejected);
                 adapter.addKyc(wData);
                 break;
         }
