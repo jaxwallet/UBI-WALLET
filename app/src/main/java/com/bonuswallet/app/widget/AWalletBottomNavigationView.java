@@ -84,7 +84,9 @@ public class AWalletBottomNavigationView extends LinearLayout {
         selectedItem = index;
         switch (index) {
             case DAPP_BROWSER:
-                dappBrowser.setImageResource(R.drawable.ic_tab_veriff_active);
+                if(dappBrowserLabel.getText().toString().equalsIgnoreCase("collect ubi"))
+                    dappBrowser.setImageResource(R.drawable.ic_tab_collect_ubi_active);
+                else dappBrowser.setImageResource(R.drawable.ic_tab_veriff_active);
                 dappBrowserLabel.setTextColor(getResources().getColor(R.color.colorHighlight, getContext().getTheme()));
                 break;
             case WALLET:
@@ -107,7 +109,9 @@ public class AWalletBottomNavigationView extends LinearLayout {
     }
 
     private void deselectAll() {
-        dappBrowser.setImageResource(R.drawable.ic_tab_veriff);
+        if(dappBrowserLabel.getText().toString().equalsIgnoreCase("collect ubi"))
+            dappBrowser.setImageResource(R.drawable.ic_tab_collect_ubi);
+        else dappBrowser.setImageResource(R.drawable.ic_tab_veriff);
         wallet.setImageResource(R.drawable.ic_tab_wallet);
         settings.setImageResource(R.drawable.ic_tab_settings);
         activity.setImageResource(R.drawable.ic_tab_activity);
@@ -155,5 +159,15 @@ public class AWalletBottomNavigationView extends LinearLayout {
     public void hideBrowserTab() {
         LinearLayout browserTab = findViewById(R.id.browser_tab);
         if (browserTab != null) browserTab.setVisibility(View.GONE);
+    }
+
+    public void changeVerifyToCollect() {
+        dappBrowserLabel.setText(R.string.collect_ubi);
+        dappBrowser.setImageResource(R.drawable.ic_tab_collect_ubi);
+    }
+
+    public void changeCollectToVerify() {
+        dappBrowserLabel.setText(R.string.toolbar_header_swap);
+        dappBrowser.setImageResource(R.drawable.ic_tab_veriff);
     }
 }

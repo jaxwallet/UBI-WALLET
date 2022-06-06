@@ -511,24 +511,28 @@ public class WalletFragment extends BaseFragment implements
                 wData = new WarningData(this);
                 wData.title = getString(R.string.claim_free_by_verifying_kyc);
                 adapter.addKyc(wData);
+                ((HomeActivity)getActivity()).changeCollectToVerify();
                 break;
             case APPROVED:
                 wData = new WarningData(this);
                 wData.title = "Approved";
                 wData.detail = getString(R.string.claim_free_by_verifying_kyc_approved);
                 adapter.addKyc(wData);
+                ((HomeActivity)getActivity()).changeVerifyToCollect();
                 break;
             case PENDING:
                 wData = new WarningData(this);
                 wData.title = "Pending";
                 wData.detail = getString(R.string.claim_free_by_verifying_kyc_pending);
                 adapter.addKyc(wData);
+                ((HomeActivity)getActivity()).changeCollectToVerify();
                 break;
             case REJECTED:
                 wData = new WarningData(this);
                 wData.title = "Rejected";
                 wData.detail = getString(R.string.claim_free_by_verifying_kyc_rejected);
                 adapter.addKyc(wData);
+                ((HomeActivity)getActivity()).changeCollectToVerify();
                 break;
         }
     }
