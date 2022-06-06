@@ -329,6 +329,7 @@ public class TokenFunctionViewModel extends BaseViewModel
         intent.putExtra(C.EXTRA_STATE, SellDetailActivity.SET_A_PRICE);
         intent.putExtra(C.EXTRA_PRICE, 0);
         intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        intent.setClassName(context, "SellDetailActivity");
         context.startActivity(intent);
     }
 

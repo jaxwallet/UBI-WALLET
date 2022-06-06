@@ -53,6 +53,7 @@ public class AdvancedSettingsViewModel extends BaseViewModel {
         localeRepository.setLocale(context, newLocale);
         Intent intent = new Intent(context, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setClassName(context, "HomeActivity");
         context.startActivity(intent);
     }
 

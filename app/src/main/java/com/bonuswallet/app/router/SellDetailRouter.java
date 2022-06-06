@@ -34,6 +34,7 @@ public class SellDetailRouter {
         intent.putExtra(C.EXTRA_STATE, state);
         intent.putExtra(C.EXTRA_PRICE, price);
         intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        intent.setClassName(context, "SellDetailActivity");
         context.startActivity(intent);
     }
 }
