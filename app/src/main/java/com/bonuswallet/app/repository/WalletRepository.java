@@ -1,15 +1,30 @@
 package com.bonuswallet.app.repository;
 
+import android.util.Log;
+
+import com.bonuswallet.app.BuildConfig;
+import com.bonuswallet.app.entity.CustomViewSettings;
 import com.bonuswallet.app.entity.Wallet;
 import com.bonuswallet.app.service.AccountKeystoreService;
 import com.bonuswallet.app.service.KeyService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.realm.Realm;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class WalletRepository implements WalletRepositoryType
 {
+	private static final String TAG = "WalletRepository";
 	private final PreferenceRepositoryType preferenceRepositoryType;
 	private final AccountKeystoreService accountKeystoreService;
 	private final EthereumNetworkRepositoryType networkRepository;
@@ -177,5 +192,25 @@ public class WalletRepository implements WalletRepositoryType
 	public Realm getWalletRealm()
 	{
 		return walletDataRealmSource.getWalletRealm();
+	}
+
+	@Override
+	public Single<String> getKYCStatus(String walletAddr)
+	{
+		if(BuildConfig.DEBUG)
+			Log.d(TAG, "getkycaddress: " + walletAddr);
+		return Single.fromCallable(() -> {
+			OkHttpClient client = new OkHttpClient();
+			Request request = new Request.Builder()
+					.url(CustomViewSettings.kycEndpoint + walletAddr)
+					.build();
+			Response response = client.newCall(request).execute();
+			String responseStr = response.body().string();
+			if(BuildConfig.DEBUG)
+						Log.d(TAG, "getkycstats: " + responseStr);
+			JSONObject object = new JSONObject(responseStr);
+			return object.getString("status");
+
+		});
 	}
 }

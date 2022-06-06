@@ -42,6 +42,7 @@ public class WalletViewModel extends BaseViewModel
     private final MutableLiveData<TokenCardMeta[]> tokens = new MutableLiveData<>();
     private final MutableLiveData<Wallet> defaultWallet = new MutableLiveData<>();
     private final MutableLiveData<GenericWalletInteract.BackupLevel> backupEvent = new MutableLiveData<>();
+    private final MutableLiveData<GenericWalletInteract.KycStatus> kycEvent = new MutableLiveData<>();
 
     private final FetchTokensInteract fetchTokensInteract;
     private final TokenDetailRouter tokenDetailRouter;
@@ -84,6 +85,7 @@ public class WalletViewModel extends BaseViewModel
     }
     public LiveData<Wallet> defaultWallet() { return defaultWallet; }
     public LiveData<GenericWalletInteract.BackupLevel> backupEvent() { return backupEvent; }
+    public LiveData<GenericWalletInteract.KycStatus> kycEvent() { return kycEvent; }
 
     public String getWalletAddr() { return defaultWallet.getValue() != null ? defaultWallet.getValue().address : ""; }
     public WalletType getWalletType() { return defaultWallet.getValue() != null ? defaultWallet.getValue().type : WalletType.KEYSTORE; }
@@ -231,19 +233,28 @@ public class WalletViewModel extends BaseViewModel
 
     public void checkBackup()
     {
-//        if (TextUtils.isEmpty(getWalletAddr()) || System.currentTimeMillis() < (lastBackupCheck + BALANCE_BACKUP_CHECK_INTERVAL)) return;
+        if (TextUtils.isEmpty(getWalletAddr()) || System.currentTimeMillis() < (lastBackupCheck + BALANCE_BACKUP_CHECK_INTERVAL)) return;
         lastBackupCheck = System.currentTimeMillis();
         double walletUSDValue = tokensService.getUSDValue();
 
-//        if (walletUSDValue > 0.0)
-//        {
+        if (walletUSDValue > 0.0)
+        {
             final BigDecimal calcValue = BigDecimal.valueOf(walletUSDValue);
             genericWalletInteract.getBackupWarning(getWalletAddr())
-                    .map(needsBackup -> calculateBackupWarning(needsBackup, calcValue))
+                    .map(needBackup -> calculateBackupWarning(needBackup, calcValue))
                     .subscribeOn(Schedulers.computation())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(backupEvent::postValue, this::onTokenBalanceError).isDisposed();
-//        }
+        }
+    }
+
+    public void checkKyc()
+    {
+        genericWalletInteract.getKYCStatus(getWalletAddr())
+                .map(kyc -> calculateKycStatus(kyc))
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(kycEvent::postValue, this::onTokenBalanceError).isDisposed();
     }
 
     private void onTokenBalanceError(Throwable throwable)
@@ -265,6 +276,16 @@ public class WalletViewModel extends BaseViewModel
         {
             return GenericWalletInteract.BackupLevel.WALLET_HAS_LOW_VALUE;
         }
+    }
+
+    private GenericWalletInteract.KycStatus calculateKycStatus(String status) {
+        if(status.equalsIgnoreCase("rejected"))
+            return GenericWalletInteract.KycStatus.REJECTED;
+        else if (status.equalsIgnoreCase("approved"))
+            return GenericWalletInteract.KycStatus.APPROVED;
+        else if (status.equalsIgnoreCase("pending"))
+            return GenericWalletInteract.KycStatus.PENDING;
+        else return GenericWalletInteract.KycStatus.INIT;
     }
 
     public void notifyRefresh()

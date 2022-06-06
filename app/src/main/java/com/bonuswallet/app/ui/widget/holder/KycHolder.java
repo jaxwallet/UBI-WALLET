@@ -1,9 +1,6 @@
 package com.bonuswallet.app.ui.widget.holder;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +10,15 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.bonuswallet.app.R;
 import com.bonuswallet.app.ui.widget.entity.WarningData;
 
-/**
- * Created by James on 18/07/2019.
- * AJ TECHNOLOGIES LTD
- */
-
-public class WarningHolder extends BinderViewHolder<WarningData>
+public class KycHolder extends BinderViewHolder<WarningData>
 {
-    public static final int VIEW_TYPE = 1015;
+    public static final int VIEW_TYPE = 3015;
     private final TextView title;
     private final TextView detail;
     private final LinearLayout layoutBackground;
@@ -34,13 +29,11 @@ public class WarningHolder extends BinderViewHolder<WarningData>
     @Override
     public void bind(@Nullable WarningData data, @NonNull Bundle addition)
     {
-        title.setText(data.title);
-        detail.setText(data.detail);
+//        title.setText(data.title);
+//        detail.setText(data.detail);
 //        layoutBackground.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), data.colour));
 //        backupButton.setText(data.buttonText);
 //        backupButton.setBackgroundColor(data.buttonColour);
-        if(data.detail != null)
-        if(data.detail.equalsIgnoreCase("approved") || data.detail.equalsIgnoreCase("pending")) backupButton.setVisibility(View.GONE);
         backupButton.setOnClickListener(v -> { data.callback.BackupClick(data.wallet); });
         menuButton.setOnClickListener(v -> {
             showPopup(popupAnchor, data);
@@ -59,7 +52,7 @@ public class WarningHolder extends BinderViewHolder<WarningData>
         popupWindow.showAsDropDown(view, 0, 20);
     }
 
-    public WarningHolder(int res_id, ViewGroup parent)
+    public KycHolder(int res_id, ViewGroup parent)
     {
         super(res_id, parent);
         title = findViewById(R.id.text_title);

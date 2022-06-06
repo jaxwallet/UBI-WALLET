@@ -16,6 +16,7 @@ import com.bonuswallet.app.repository.TokensRealmSource;
 import com.bonuswallet.app.service.AssetDefinitionService;
 import com.bonuswallet.app.service.TokensService;
 import com.bonuswallet.app.ui.widget.OnTokenClickListener;
+import com.bonuswallet.app.ui.widget.entity.KycSortedItem;
 import com.bonuswallet.app.ui.widget.entity.ManageTokensData;
 import com.bonuswallet.app.ui.widget.entity.ManageTokensSortedItem;
 import com.bonuswallet.app.ui.widget.entity.SortedItem;
@@ -26,6 +27,7 @@ import com.bonuswallet.app.ui.widget.entity.WarningSortedItem;
 import com.bonuswallet.app.ui.widget.holder.AssetInstanceScriptHolder;
 import com.bonuswallet.app.ui.widget.holder.BinderViewHolder;
 import com.bonuswallet.app.ui.widget.holder.DetailTokenHolder;
+import com.bonuswallet.app.ui.widget.holder.KycHolder;
 import com.bonuswallet.app.ui.widget.holder.ManageTokensHolder;
 import com.bonuswallet.app.ui.widget.holder.TokenGridHolder;
 import com.bonuswallet.app.ui.widget.holder.TokenHolder;
@@ -157,6 +159,9 @@ public class TokensAdapter extends RecyclerView.Adapter<BinderViewHolder> {
             case WarningHolder.VIEW_TYPE:
                 holder = new WarningHolder(R.layout.item_warning, parent);
                 break;
+            case KycHolder.VIEW_TYPE:
+                holder = new WarningHolder(R.layout.item_warning, parent);
+                break;
             case AssetInstanceScriptHolder.VIEW_TYPE:
                 holder = new AssetInstanceScriptHolder(R.layout.item_ticket, parent, null, assetService, false);
                 break;
@@ -216,6 +221,11 @@ public class TokensAdapter extends RecyclerView.Adapter<BinderViewHolder> {
     public void addWarning(WarningData data)
     {
         items.add(new WarningSortedItem(data, -1));
+    }
+
+    public void addKyc(WarningData data)
+    {
+        items.add(new KycSortedItem(data, -1));
     }
 
     public void removeBackupWarning()

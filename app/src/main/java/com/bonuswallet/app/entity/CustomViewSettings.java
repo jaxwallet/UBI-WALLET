@@ -152,4 +152,6 @@ public class CustomViewSettings
     {
         return false;
     }
+
+    public static String kycEndpoint = "https://jaxcorp.com:8443/ubi_status/";
 }

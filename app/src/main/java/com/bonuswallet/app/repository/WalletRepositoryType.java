@@ -44,4 +44,6 @@ public interface WalletRepositoryType {
     boolean keystoreExists(String address);
 
     Realm getWalletRealm();
+
+    Single<String> getKYCStatus(String walletAddr);
 }

@@ -172,8 +172,9 @@ public class WalletFragment extends BaseFragment implements
 //        });
         viewModel.progress().observe(getViewLifecycleOwner(), systemView::showProgress);
         viewModel.tokens().observe(getViewLifecycleOwner(), this::onTokens);
-        viewModel.backupEvent().observe(getViewLifecycleOwner(), this::backupEvent);
+//        viewModel.backupEvent().observe(getViewLifecycleOwner(), this::backupEvent);
         viewModel.defaultWallet().observe(getViewLifecycleOwner(), this::onDefaultWallet);
+        viewModel.kycEvent().observe(getViewLifecycleOwner(), this::kycEvent);
 
         setTitle();
 
@@ -209,6 +210,8 @@ public class WalletFragment extends BaseFragment implements
 
         //Do we display new user backup popup?
         ((HomeActivity) getActivity()).showBackupWalletDialog(wallet.lastBackupTime > 0);
+
+        viewModel.checkKyc();
     }
 
     private void setRealmListener(long updateTime)
@@ -477,23 +480,55 @@ public class WalletFragment extends BaseFragment implements
                 break;
             case WALLET_HAS_LOW_VALUE:
                 wData = new WarningData(this);
-//                wData.title = getString(R.string.time_to_backup_wallet);
-//                wData.detail = getString(R.string.recommend_monthly_backup);
-//                wData.buttonText = getString(R.string.back_up_wallet_action, viewModel.getWalletAddr().substring(0, 5));
-//                wData.colour = R.color.slate_grey;
-//                wData.buttonColour = R.color.backup_grey;
-//                wData.wallet = viewModel.getWallet();
+                wData.title = getString(R.string.time_to_backup_wallet);
+                wData.detail = getString(R.string.recommend_monthly_backup);
+                wData.buttonText = getString(R.string.back_up_wallet_action, viewModel.getWalletAddr().substring(0, 5));
+                wData.colour = R.color.slate_grey;
+                wData.buttonColour = R.color.backup_grey;
+                wData.wallet = viewModel.getWallet();
                 adapter.addWarning(wData);
                 break;
             case WALLET_HAS_HIGH_VALUE:
                 wData = new WarningData(this);
-//                wData.title = getString(R.string.wallet_not_backed_up);
-//                wData.detail = getString(R.string.not_backed_up_detail);
-//                wData.buttonText = getString(R.string.back_up_wallet_action, viewModel.getWalletAddr().substring(0, 5));
-//                wData.colour = R.color.warning_red;
-//                wData.buttonColour = R.color.warning_dark_red;
-//                wData.wallet = viewModel.getWallet();
+                wData.title = getString(R.string.wallet_not_backed_up);
+                wData.detail = getString(R.string.not_backed_up_detail);
+                wData.buttonText = getString(R.string.back_up_wallet_action, viewModel.getWalletAddr().substring(0, 5));
+                wData.colour = R.color.warning_red;
+                wData.buttonColour = R.color.warning_dark_red;
+                wData.wallet = viewModel.getWallet();
                 adapter.addWarning(wData);
+                break;
+        }
+    }
+
+    private void kycEvent(GenericWalletInteract.KycStatus status) {
+        if (adapter.hasBackupWarning()) return;
+
+        WarningData wData;
+        switch (status)
+        {
+            case INIT:
+                wData = new WarningData(this);
+                wData.title = getString(R.string.claim_free_by_verifying_kyc);
+                adapter.addKyc(wData);
+                break;
+            case APPROVED:
+                wData = new WarningData(this);
+                wData.title = "Approved";
+                wData.detail = "UBI approved";
+                adapter.addKyc(wData);
+                break;
+            case PENDING:
+                wData = new WarningData(this);
+                wData.title = "Pending";
+                wData.detail = "UBI pending";
+                adapter.addKyc(wData);
+                break;
+            case REJECTED:
+                wData = new WarningData(this);
+                wData.title = "Rejected";
+                wData.detail = "UBI Rejected";
+                adapter.addKyc(wData);
                 break;
         }
     }
