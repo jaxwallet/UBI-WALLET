@@ -1,5 +1,6 @@
 package com.bonuswallet.app.router;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
@@ -34,7 +35,7 @@ public class SellDetailRouter {
         intent.putExtra(C.EXTRA_STATE, state);
         intent.putExtra(C.EXTRA_PRICE, price);
         intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        intent.setClassName(context, "SellDetailActivity");
+        intent.setComponent(new ComponentName(context, "SellDetailRouter"));
         context.startActivity(intent);
     }
 }

@@ -9,6 +9,7 @@ import static com.bonuswallet.app.C.RESET_WALLET;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -269,6 +270,7 @@ public class AdvancedSettingsActivity extends BaseActivity {
         String selectedLocale = viewModel.getActiveLocale();
         intent.putExtra(EXTRA_LOCALE, selectedLocale);
         intent.putParcelableArrayListExtra(EXTRA_STATE, viewModel.getLocaleList(this));
+        intent.setComponent(new ComponentName(getBaseContext(), "AdvancedSettingsActivity"));
         updateLocale.launch(intent);
     }
 

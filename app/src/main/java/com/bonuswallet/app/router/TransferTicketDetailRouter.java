@@ -1,5 +1,6 @@
 package com.bonuswallet.app.router;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
@@ -21,6 +22,7 @@ public class TransferTicketDetailRouter {
         intent.putExtra(C.EXTRA_ADDRESS, token.getAddress());
         intent.putExtra(C.EXTRA_TOKENID_LIST, ticketIDs);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setComponent(new ComponentName(context, "TransferTicketDetailRouter"));
         context.startActivity(intent);
     }
 
@@ -32,6 +34,7 @@ public class TransferTicketDetailRouter {
         intent.putExtra(C.EXTRA_TOKENID_LIST, ticketIDs);
         intent.putExtra(C.EXTRA_STATE, state);
         intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        intent.setComponent(new ComponentName(context, "TransferTicketDetailRouter"));
         context.startActivity(intent);
     }
 }

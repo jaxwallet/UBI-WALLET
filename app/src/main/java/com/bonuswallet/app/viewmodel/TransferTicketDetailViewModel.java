@@ -1,6 +1,7 @@
 package com.bonuswallet.app.viewmodel;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Pair;
@@ -315,6 +316,7 @@ public class TransferTicketDetailViewModel extends BaseViewModel {
             intent.putExtra(C.EXTRA_TOKENID_LIST, ticketIds);
             intent.putExtra(C.EXTRA_STATE, transferStatus.ordinal());
             intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            intent.setComponent(new ComponentName(context, "TransferTicketDetailViewModel"));
             context.startActivity(intent);
         }
     }

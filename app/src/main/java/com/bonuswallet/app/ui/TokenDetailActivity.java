@@ -1,5 +1,6 @@
 package com.bonuswallet.app.ui;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -213,6 +214,7 @@ public class TokenDetailActivity extends BaseActivity implements StandardFunctio
         intent.putExtra(EXTRA_TOKENID_LIST, tokenId.toString(16));
         intent.putExtra(EXTRA_STATE, TRANSFER_TO_ADDRESS.ordinal());
         intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        intent.setComponent(new ComponentName(getBaseContext(), "TokenDetailActivity"));
         transferDirectDialogResult.launch(intent);
     }
 

@@ -5,6 +5,7 @@ import static com.bonuswallet.app.C.Key.WALLET;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -292,6 +293,7 @@ public class WalletActionsActivity extends BaseActivity implements Runnable, Vie
     private void backupSuccessful() {
         Intent intent = new Intent(BACKUP_WALLET_SUCCESS);
         intent.putExtra("Key", wallet.address);
+        intent.setComponent(new ComponentName(getBaseContext(), "WalletActionsActivity"));
         sendBroadcast(intent);
     }
 

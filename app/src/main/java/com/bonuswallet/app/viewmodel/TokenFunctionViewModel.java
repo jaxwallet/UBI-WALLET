@@ -1,6 +1,7 @@
 package com.bonuswallet.app.viewmodel;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -172,7 +173,7 @@ public class TokenFunctionViewModel extends BaseViewModel
         intent.putExtra(C.Key.WALLET, wallet);
         intent.putExtra(C.EXTRA_CHAIN_ID, token.tokenInfo.chainId);
         intent.putExtra(C.EXTRA_ADDRESS, token.getAddress());
-
+        intent.setComponent(new ComponentName(ctx, "TokenFunctionViewModel"));
         intent.putExtra(C.EXTRA_TOKENID_LIST, Utils.bigIntListToString(selection, false));
 
         if (token.isERC721()) //skip numerical selection - ERC721 has no multiple token transfer
@@ -329,7 +330,7 @@ public class TokenFunctionViewModel extends BaseViewModel
         intent.putExtra(C.EXTRA_STATE, SellDetailActivity.SET_A_PRICE);
         intent.putExtra(C.EXTRA_PRICE, 0);
         intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        intent.setClassName(context, "SellDetailActivity");
+        intent.setComponent(new ComponentName(context, "TokenFunctionViewModel"));
         context.startActivity(intent);
     }
 
