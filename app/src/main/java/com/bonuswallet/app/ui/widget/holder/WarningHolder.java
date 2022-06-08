@@ -40,10 +40,15 @@ public class WarningHolder extends BinderViewHolder<WarningData>
 //        backupButton.setText(data.buttonText);
 //        backupButton.setBackgroundColor(data.buttonColour);
         if(data.title != null) {
-            if(data.title.equalsIgnoreCase("pending")) backupButton.setVisibility(View.GONE);
+            if(data.title.equalsIgnoreCase("pending")) {
+                backupButton.setVisibility(View.GONE);
+            }
             if(data.title.equalsIgnoreCase("approved")) {
                 backupButton.setText(R.string.collect_ubi);
                 backupButton.setOnClickListener(v -> { data.callback.BackupClick(data.wallet); });
+                layoutBackground.setBackgroundResource(R.drawable.background_round_green);
+            } else {
+                layoutBackground.setBackgroundResource(R.drawable.background_round_warning_red);
             }
         }
 
